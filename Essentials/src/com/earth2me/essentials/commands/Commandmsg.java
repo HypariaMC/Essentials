@@ -1,7 +1,5 @@
 package com.earth2me.essentials.commands;
 
-import static com.earth2me.essentials.I18n.tl;
-
 import com.earth2me.essentials.CommandSource;
 import com.earth2me.essentials.Console;
 import com.earth2me.essentials.User;
@@ -29,7 +27,7 @@ public class Commandmsg extends EssentialsLoopCommand {
         if (sender.isPlayer()) {
             User user = ess.getUser(sender.getPlayer());
             if (user.isMuted()) {
-                throw new Exception(tl("voiceSilenced"));
+                throw new Exception(sender.tl("voiceSilenced"));
             }
             message = FormatUtil.formatMessage(user, "essentials.msg", message);
             canWildcard = user.isAuthorized("essentials.msg.multiple");

@@ -6,8 +6,6 @@ import org.bukkit.Server;
 import java.util.Collections;
 import java.util.List;
 
-import static com.earth2me.essentials.I18n.tl;
-
 
 public class Commandtpa extends EssentialsCommand {
     public Commandtpa() {
@@ -25,28 +23,28 @@ public class Commandtpa extends EssentialsCommand {
             throw new NotEnoughArgumentsException();
         }
         if (!player.isTeleportEnabled()) {
-            throw new Exception(tl("teleportDisabled", player.getDisplayName()));
+            throw new Exception(user.tl("teleportDisabled", player.getDisplayName()));
         }
         if (user.getWorld() != player.getWorld() && ess.getSettings().isWorldTeleportPermissions() && !user.isAuthorized("essentials.worlds." + player.getWorld().getName())) {
-            throw new Exception(tl("noPerm", "essentials.worlds." + player.getWorld().getName()));
+            throw new Exception(user.tl("noPerm", "essentials.worlds." + player.getWorld().getName()));
         }
         // Don't let sender request teleport twice to the same player.
         if (user.getConfigUUID().equals(player.getTeleportRequest()) && player.hasOutstandingTeleportRequest() // Check timeout
             && player.isTpRequestHere() == false) { // Make sure the last teleport request was actually tpa and not tpahere
-            throw new Exception(tl("requestSentAlready", player.getDisplayName()));
+            throw new Exception(user.tl("requestSentAlready", player.getDisplayName()));
         }
 
         if (!player.isIgnoredPlayer(user)) {
             player.requestTeleport(user, false);
-            player.sendMessage(tl("teleportRequest", user.getDisplayName()));
-            player.sendMessage(tl("typeTpaccept"));
-            player.sendMessage(tl("typeTpdeny"));
+            player.sendTl("teleportRequest", user.getDisplayName());
+            player.sendTl("typeTpaccept");
+            player.sendTl("typeTpdeny");
             if (ess.getSettings().getTpaAcceptCancellation() != 0) {
-                player.sendMessage(tl("teleportRequestTimeoutInfo", ess.getSettings().getTpaAcceptCancellation()));
+                player.sendTl("teleportRequestTimeoutInfo", ess.getSettings().getTpaAcceptCancellation());
             }
         }
-        user.sendMessage(tl("requestSent", player.getDisplayName()));
-        user.sendMessage(tl("typeTpacancel"));
+        user.sendTl("requestSent", player.getDisplayName());
+        user.sendTl("typeTpacancel");
     }
 
     @Override

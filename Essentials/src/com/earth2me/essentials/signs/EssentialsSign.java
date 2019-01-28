@@ -41,7 +41,7 @@ public class EssentialsSign {
             // they won't change it to §1[Signname]
             return true;
         }
-        sign.setLine(0, tl("signFormatFail", this.signName));
+        sign.setLine(0, user.tl("signFormatFail", this.signName));
 
         final SignCreateEvent signEvent = new SignCreateEvent(sign, this, user);
         ess.getServer().getPluginManager().callEvent(signEvent);
@@ -312,7 +312,7 @@ public class EssentialsSign {
         final ItemStack item = getItemStack(itemType, 1, ess);
         final int amount = Math.min(getIntegerPositive(getSignText(sign, amountIndex)), item.getType().getMaxStackSize() * player.getBase().getInventory().getSize());
         if (item.getType() == Material.AIR || amount < 1) {
-            throw new SignException(tl("moreThanZero"));
+            throw new SignException(player.tl("moreThanZero"));
         }
         item.setAmount(amount);
         return new Trade(item, ess);

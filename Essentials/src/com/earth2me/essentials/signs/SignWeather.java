@@ -26,7 +26,7 @@ public class SignWeather extends EssentialsSign {
             return true;
         }
         sign.setLine(1, "§c<sun|storm>");
-        throw new SignException(tl("onlySunStorm"));
+        throw new SignException(player.tl("onlySunStorm"));
     }
 
     @Override
@@ -46,6 +46,6 @@ public class SignWeather extends EssentialsSign {
             Trade.log("Sign", "WeatherStorm", "Interact", username, null, username, charge, sign.getBlock().getLocation(), ess);
             return true;
         }
-        throw new SignException(tl("onlySunStorm"));
+        throw new SignException(player.tl("onlySunStorm"));
     }
 }

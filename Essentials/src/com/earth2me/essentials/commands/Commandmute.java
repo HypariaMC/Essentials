@@ -10,8 +10,6 @@ import org.bukkit.Server;
 import java.util.List;
 import java.util.logging.Level;
 
-import static com.earth2me.essentials.I18n.tl;
-
 
 public class Commandmute extends EssentialsCommand {
     public Commandmute() {
@@ -33,11 +31,11 @@ public class Commandmute extends EssentialsCommand {
         }
         if (!user.getBase().isOnline()) {
             if (sender.isPlayer() && !ess.getUser(sender.getPlayer()).isAuthorized("essentials.mute.offline")) {
-                throw new Exception(tl("muteExemptOffline"));
+                throw new Exception(sender.tl("muteExemptOffline"));
             }
         } else {
             if (user.isAuthorized("essentials.mute.exempt") && sender.isPlayer()) {
-                throw new Exception(tl("muteExempt"));
+                throw new Exception(sender.tl("muteExempt"));
             }
         }
         
@@ -58,31 +56,31 @@ public class Commandmute extends EssentialsCommand {
             }
             user.setMuteTimeout(muteTimestamp);
             final boolean muted = user.getMuted();
-            String muteTime = DateUtil.formatDateDiff(muteTimestamp);
+            String muteTime = DateUtil.formatDateDiff(sender, muteTimestamp);
 
             if (nomatch) {
-                sender.sendMessage(tl("userUnknown", user.getName()));
+                sender.sendTl("userUnknown", user.getName());
             }
 
             if (muted) {
                 if (muteTimestamp > 0) {
-                    sender.sendMessage(tl("mutedPlayerFor", user.getDisplayName(), muteTime));
-                    user.sendMessage(tl("playerMutedFor", muteTime));
+                    sender.sendTl("mutedPlayerFor", user.getDisplayName(), muteTime);
+                    user.sendTl("playerMutedFor", muteTime);
                 } else {
-                    sender.sendMessage(tl("mutedPlayer", user.getDisplayName()));
-                    user.sendMessage(tl("playerMuted"));
+                    sender.sendTl("mutedPlayer", user.getDisplayName());
+                    user.sendTl("playerMuted");
                 }
                 final String message;
                 if (muteTimestamp > 0) {
-                    message = tl("muteNotifyFor", sender.getSender().getName(), user.getName(), muteTime);
+                    message = user.tl("muteNotifyFor", sender.getSender().getName(), user.getName(), muteTime);
                 } else {
-                    message = tl("muteNotify", sender.getSender().getName(), user.getName());
+                    message = user.tl("muteNotify", sender.getSender().getName(), user.getName());
                 }
                 server.getLogger().log(Level.INFO, message);
                 ess.broadcastMessage("essentials.mute.notify", message);
             } else {
-                sender.sendMessage(tl("unmutedPlayer", user.getDisplayName()));
-                user.sendMessage(tl("playerUnmuted"));
+                sender.sendTl("unmutedPlayer", user.getDisplayName());
+                user.sendTl("playerUnmuted");
             }
         }
     }

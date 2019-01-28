@@ -48,7 +48,7 @@ public class Commandbanip extends EssentialsCommand {
         if (args.length > 1) {
             banReason = FormatUtil.replaceFormat(getFinalArg(args, 1).replace("\\n", "\n").replace("|", "\n"));
         } else {
-            banReason = tl("defaultBanReason");
+            banReason = sender.tl("defaultBanReason");
         }
 
         String banDisplay = tl("banFormat", banReason, senderName);
@@ -62,7 +62,7 @@ public class Commandbanip extends EssentialsCommand {
             }
         }
 
-        ess.broadcastMessage("essentials.banip.notify", tl("playerBanIpAddress", senderName, ipAddress, banReason));
+        ess.broadcastTl("essentials.banip.notify", "playerBanIpAddress", senderName, ipAddress, banReason);
     }
 
     @Override

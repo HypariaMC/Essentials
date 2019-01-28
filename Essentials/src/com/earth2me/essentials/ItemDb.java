@@ -232,7 +232,7 @@ public class ItemDb implements IConf, net.ess3.api.IItemDb {
         }
 
         if (is.isEmpty() || is.get(0).getType() == Material.AIR) {
-            throw new Exception(tl("itemSellAir"));
+            throw new Exception(user.tl( "itemSellAir"));
         }
 
         return is;

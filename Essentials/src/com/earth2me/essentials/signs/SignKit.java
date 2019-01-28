@@ -63,9 +63,9 @@ public class SignKit extends EssentialsSign {
             return true;
         } else {
             if (group.isEmpty()) {
-                throw new SignException(tl("noKitPermission", "essentials.kits." + kitName));
+                throw new SignException(player.tl("noKitPermission", "essentials.kits." + kitName));
             } else {
-                throw new SignException(tl("noKitGroup", group));
+                throw new SignException(player.tl("noKitGroup", group));
             }
         }
     }

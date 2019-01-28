@@ -22,7 +22,7 @@ public class SignRepair extends EssentialsSign {
             sign.setLine(1, "Hand");
         } else if (!repairTarget.equalsIgnoreCase("all") && !repairTarget.equalsIgnoreCase("hand")) {
             sign.setLine(1, "§c<hand|all>");
-            throw new SignException(tl("invalidSignLine", 2));
+            throw new SignException(player.tl("invalidSignLine", 2));
         }
         validateTrade(sign, 2, ess);
         return true;

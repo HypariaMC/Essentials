@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 
-import static com.earth2me.essentials.I18n.tl;
-
 
 public class Commandban extends EssentialsCommand {
     public Commandban() {
@@ -35,11 +33,11 @@ public class Commandban extends EssentialsCommand {
         }
         if (!user.getBase().isOnline()) {
             if (sender.isPlayer() && !ess.getUser(sender.getPlayer()).isAuthorized("essentials.ban.offline")) {
-                throw new Exception(tl("banExemptOffline"));
+                throw new Exception(user.tl("banExemptOffline"));
             }
         } else {
             if (user.isAuthorized("essentials.ban.exempt") && sender.isPlayer()) {
-                throw new Exception(tl("banExempt"));
+                throw new Exception(user.tl("banExempt"));
             }
         }
 
@@ -48,21 +46,21 @@ public class Commandban extends EssentialsCommand {
         if (args.length > 1) {
             banReason = FormatUtil.replaceFormat(getFinalArg(args, 1).replace("\\n", "\n").replace("|", "\n"));
         } else {
-            banReason = tl("defaultBanReason");
+            banReason = user.tl("defaultBanReason");
         }
 
         ess.getServer().getBanList(BanList.Type.NAME).addBan(user.getName(), banReason, null, senderName);
 
-        String banDisplay = tl("banFormat", banReason, senderName);
+        String banDisplay = user.tl("banFormat", banReason, senderName);
 
         user.getBase().kickPlayer(banDisplay);
-        server.getLogger().log(Level.INFO, tl("playerBanned", senderName, user.getName(), banDisplay));
+        server.getLogger().log(Level.INFO, user.tl("playerBanned", senderName, user.getName(), banDisplay));
 
         if (nomatch) {
-            sender.sendMessage(tl("userUnknown", user.getName()));
+            sender.sendTl("userUnknown", user.getName());
         }
 
-        ess.broadcastMessage("essentials.ban.notify", tl("playerBanned", senderName, user.getName(), banReason));
+        ess.broadcastMessage("essentials.ban.notify", user.tl("playerBanned", senderName, user.getName(), banReason));
     }
 
     @Override

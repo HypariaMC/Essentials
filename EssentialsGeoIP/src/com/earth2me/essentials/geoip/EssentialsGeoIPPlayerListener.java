@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 import java.util.Date;
 import java.util.zip.GZIPInputStream;
 import java.util.Arrays;
-import java.util.List;
 import com.ice.tar.TarInputStream;
 import com.ice.tar.TarEntry;
 
@@ -102,7 +101,7 @@ public class EssentialsGeoIPPlayerListener implements Listener, IConf {
             for (Player onlinePlayer : player.getServer().getOnlinePlayers()) {
                 User user = ess.getUser(onlinePlayer);
                 if (user.isAuthorized("essentials.geoip.show")) {
-                    user.sendMessage(tl("geoipJoinFormat", u.getDisplayName(), sb.toString()));
+                    user.sendTl("geoipJoinFormat", u.getDisplayName(), sb.toString());
                 }
             }
         }
