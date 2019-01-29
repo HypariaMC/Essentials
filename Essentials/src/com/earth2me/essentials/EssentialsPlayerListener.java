@@ -43,6 +43,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import static com.earth2me.essentials.I18n.capitalCase;
 import static com.earth2me.essentials.I18n.tl;
 
 
@@ -79,7 +80,7 @@ public class EssentialsPlayerListener implements Listener {
         final User user = ess.getUser(event.getPlayer());
         if (user.isMuted()) {
             event.setCancelled(true);
-            user.sendMessage(tl("voiceSilenced"));
+            user.sendTl("voiceSilenced");
             LOGGER.info(tl("mutedUserSpeaks", user.getName(), event.getMessage()));
         }
         try {
@@ -283,7 +284,7 @@ public class EssentialsPlayerListener implements Listener {
                     final List<String> mail = user.getMails();
                     if (mail.isEmpty()) {
                         if (ess.getSettings().isNotifyNoNewMail()) {
-                            user.sendMessage(tl("noNewMail")); // Only notify if they want us to.
+                            user.sendTl("noNewMail"); // Only notify if they want us to.
                         }
                     } else {
                         user.notifyOfMail();
@@ -296,7 +297,7 @@ public class EssentialsPlayerListener implements Listener {
                         user.getBase().setAllowFlight(true);
                         user.getBase().setFlying(true);
                         if (ess.getSettings().isSendFlyEnableOnJoin()) {
-                            user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
+                            user.sendTl("flyMode", user.tl( "enabled"), user.getDisplayName());
                         }
                     }
                 }
@@ -469,9 +470,9 @@ public class EssentialsPlayerListener implements Listener {
                     for (User spyer : ess.getOnlineUsers()) {
                         if (spyer.isSocialSpyEnabled() && !player.equals(spyer.getBase())) {
                             if (user.isMuted() && ess.getSettings().getSocialSpyListenMutedPlayers()) {
-                                spyer.sendMessage(tl("socialSpyMutedPrefix") + player.getDisplayName() + ": " + event.getMessage());
+                                spyer.sendMessage(spyer.tl( "socialSpyMutedPrefix") + player.getDisplayName() + ": " + event.getMessage());
                             } else {
-                                spyer.sendMessage(tl("socialSpyPrefix") + player.getDisplayName() + ": " + event.getMessage());
+                                spyer.sendMessage(spyer.tl( "socialSpyPrefix") + player.getDisplayName() + ": " + event.getMessage());
                             }
                         }
                     }
@@ -479,9 +480,10 @@ public class EssentialsPlayerListener implements Listener {
             }
         }
 
-        if (ess.getUser(player).isMuted() && (ess.getSettings().getMuteCommands().contains(cmd) || ess.getSettings().getMuteCommands().contains("*"))) {
+        final User user = ess.getUser(player);
+        if (user.isMuted() && (ess.getSettings().getMuteCommands().contains(cmd) || ess.getSettings().getMuteCommands().contains("*"))) {
             event.setCancelled(true);
-            player.sendMessage(tl("voiceSilenced"));
+            user.sendTl("voiceSilenced");
             LOGGER.info(tl("mutedUserSpeaks", player.getName(), event.getMessage()));
             return;
         }
@@ -498,7 +500,6 @@ public class EssentialsPlayerListener implements Listener {
                     broadcast = false;
             }
         }
-        final User user = ess.getUser(player);
         if (update) {
             user.updateActivityOnInteract(broadcast);
         }
@@ -523,8 +524,8 @@ public class EssentialsPlayerListener implements Listener {
                 } else if (entry.getKey().matcher(fullCommand).matches()) {
                     // User's current cooldown hasn't expired, inform and terminate cooldown code.
                     if (entry.getValue() > System.currentTimeMillis()) {
-                        String commandCooldownTime = DateUtil.formatDateDiff(entry.getValue());
-                        user.sendMessage(tl("commandCooldown", commandCooldownTime));
+                        String commandCooldownTime = DateUtil.formatDateDiff(user.getSource(), entry.getValue());
+                        user.sendTl("commandCooldown", commandCooldownTime);
                         cooldownFound = true;
                         event.setCancelled(true);
                         break;
@@ -583,11 +584,11 @@ public class EssentialsPlayerListener implements Listener {
         if (ess.getSettings().getNoGodWorlds().contains(newWorld) && user.isGodModeEnabledRaw()) {
             // Player god mode is never disabled in order to retain it when changing worlds once more.
             // With that said, players will still take damage as per the result of User#isGodModeEnabled()
-            user.sendMessage(tl("noGodWorldWarning"));
+            user.sendTl("noGodWorldWarning");
         }
 
         if (!user.getWorld().getName().equals(newWorld)) {
-            user.sendMessage(tl("currentWorld", newWorld));
+            user.sendTl("currentWorld", newWorld);
         }
         if (user.isVanished()) {
             user.setVanished(user.isAuthorized("essentials.vanish"));
@@ -602,7 +603,7 @@ public class EssentialsPlayerListener implements Listener {
                     User player = ess.getUser(event.getPlayer());
                     if (player.isAuthorized("essentials.sethome.bed")) {
                         player.getBase().setBedSpawnLocation(event.getClickedBlock().getLocation());
-                        player.sendMessage(tl("bedSet", player.getLocation().getWorld().getName(), player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ()));
+                        player.sendTl("bedSet", player.getLocation().getWorld().getName(), player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
                     }
                 }
                 break;

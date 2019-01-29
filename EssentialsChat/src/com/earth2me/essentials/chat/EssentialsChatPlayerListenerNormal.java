@@ -53,7 +53,7 @@ public class EssentialsChatPlayerListenerNormal extends EssentialsChatPlayer {
                 return;
             }
 
-            user.sendMessage(tl("notAllowedTo" + chatStore.getType().substring(0, 1).toUpperCase(Locale.ENGLISH) + chatStore.getType().substring(1)));
+            user.sendTl("notAllowedTo" + chatStore.getType().substring(0, 1).toUpperCase(Locale.ENGLISH) + chatStore.getType().substring(1));
             event.setCancelled(true);
             return;
         }
@@ -107,7 +107,7 @@ public class EssentialsChatPlayerListenerNormal extends EssentialsChatPlayer {
         }
 
         if (outList.size() < 2) {
-            user.sendMessage(tl("localNoOne"));
+            user.sendTl("localNoOne");
         }
 
         LocalChatSpyEvent spyEvent = new LocalChatSpyEvent(event.isAsynchronous(), event.getPlayer(), format, event.getMessage(), spyList);

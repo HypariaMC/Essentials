@@ -4,6 +4,7 @@ import com.earth2me.essentials.ChargeException;
 import com.earth2me.essentials.Trade;
 import com.earth2me.essentials.User;
 import net.ess3.api.IEssentials;
+import org.bukkit.ChatColor;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import static com.earth2me.essentials.I18n.tl;
@@ -20,8 +21,8 @@ public class SignWarp extends EssentialsSign {
         final String warpName = sign.getLine(1);
 
         if (warpName.isEmpty()) {
-            sign.setLine(1, "§c<Warp name>");
-            throw new SignException(tl("invalidSignLine", 1));
+            sign.setLine(1, ChatColor.RED + "<Warp name>");
+            throw new SignException(player.tl("invalidSignLine", 1));
         } else {
             try {
                 ess.getWarps().getWarp(warpName);
@@ -30,7 +31,7 @@ public class SignWarp extends EssentialsSign {
             }
             final String group = sign.getLine(2);
             if ("Everyone".equalsIgnoreCase(group) || "Everybody".equalsIgnoreCase(group)) {
-                sign.setLine(2, "§2Everyone");
+                sign.setLine(2, ChatColor.GREEN + "Everyone");
             }
             return true;
         }

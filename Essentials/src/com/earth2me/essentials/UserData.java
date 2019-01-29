@@ -92,6 +92,7 @@ public abstract class UserData extends PlayerExtension implements IConf {
         acceptingPay = _getAcceptingPay();
         confirmPay = _getConfirmPay();
         confirmClear = _getConfirmClear();
+        locale = _getLocale();
     }
 
     private BigDecimal money;
@@ -207,7 +208,7 @@ public abstract class UserData extends PlayerExtension implements IConf {
             config.removeProperty("homes." + search);
             config.save();
         } else {
-            throw new Exception(tl("invalidHome", search));
+            throw new Exception(((User) this).tl("invalidHome", search));
         }
     }
 
@@ -928,6 +929,22 @@ public abstract class UserData extends PlayerExtension implements IConf {
     public void setPromptingClearConfirm(boolean prompt) {
         this.confirmClear = prompt;
         config.setProperty("confirm-clear", prompt);
+        save();
+    }
+
+    private Locale locale = null;
+
+    private Locale _getLocale() {
+        return I18n.getLocale(config.getString("locale", null));
+    }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+        config.setProperty("locale", locale.toString());
         save();
     }
 

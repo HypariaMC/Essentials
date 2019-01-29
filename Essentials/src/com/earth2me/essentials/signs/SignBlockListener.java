@@ -97,8 +97,7 @@ public class SignBlockListener implements Listener {
             // Top line and sign#getSuccessName() are both lowercased since contains is case-sensitive.
             String successName = sign.getSuccessName(ess);
             if (successName == null) {
-                event.getPlayer().sendMessage(I18n.tl("errorWithMessage",
-                    "Please report this error to a staff member."));
+                user.sendTl("errorWithMessage", "Please report this error to a staff member.");
                 return;
             }
             String lSuccessName = ChatColor.stripColor(successName.toLowerCase());

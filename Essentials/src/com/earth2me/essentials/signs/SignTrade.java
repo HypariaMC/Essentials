@@ -57,7 +57,7 @@ public class SignTrade extends EssentialsSign {
                 }
             } catch (SignException e) {
                 if (store == null) {
-                    throw new SignException(tl("tradeSignEmptyOwner"), e);
+                    throw new SignException(player.tl("tradeSignEmptyOwner"), e);
                 }
             }
             Trade.log("Sign", "Trade", "Deposit", username, store, username, null, sign.getBlock().getLocation(), ess);

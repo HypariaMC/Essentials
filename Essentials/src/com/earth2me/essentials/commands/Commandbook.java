@@ -11,8 +11,6 @@ import org.bukkit.inventory.meta.BookMeta;
 import java.util.Collections;
 import java.util.List;
 
-import static com.earth2me.essentials.I18n.tl;
-
 
 public class Commandbook extends EssentialsCommand {
     public Commandbook() {
@@ -30,26 +28,26 @@ public class Commandbook extends EssentialsCommand {
                 if (user.isAuthorized("essentials.book.author") && (isAuthor(bmeta, player) || user.isAuthorized("essentials.book.others"))) {
                     bmeta.setAuthor(args[1]);
                     item.setItemMeta(bmeta);
-                    user.sendMessage(tl("bookAuthorSet", getFinalArg(args, 1)));
+                    user.sendTl("bookAuthorSet", getFinalArg(args, 1));
                 } else {
-                    throw new Exception(tl("denyChangeAuthor"));
+                    throw new Exception(user.tl("denyChangeAuthor"));
                 }
             } else if (args.length > 1 && args[0].equalsIgnoreCase("title")) {
                 if (user.isAuthorized("essentials.book.title") && (isAuthor(bmeta, player) || user.isAuthorized("essentials.book.others"))) {
                     bmeta.setTitle(args[1]);
                     item.setItemMeta(bmeta);
-                    user.sendMessage(tl("bookTitleSet", getFinalArg(args, 1)));
+                    user.sendTl("bookTitleSet", getFinalArg(args, 1));
                 } else {
-                    throw new Exception(tl("denyChangeTitle"));
+                    throw new Exception(user.tl("denyChangeTitle"));
                 }
             } else {
                 if (isAuthor(bmeta, player) || user.isAuthorized("essentials.book.others")) {
                     ItemStack newItem = new ItemStack(Material.BOOK_AND_QUILL, item.getAmount());
                     newItem.setItemMeta(bmeta);
                     InventoryWorkaround.setItemInMainHand(user.getBase(), newItem);
-                    user.sendMessage(tl("editBookContents"));
+                    user.sendTl("editBookContents");
                 } else {
-                    throw new Exception(tl("denyBookEdit"));
+                    throw new Exception(user.tl("denyBookEdit"));
                 }
             }
         } else if (item.getType() == Material.BOOK_AND_QUILL) {
@@ -60,9 +58,9 @@ public class Commandbook extends EssentialsCommand {
             ItemStack newItem = new ItemStack(Material.WRITTEN_BOOK, item.getAmount());
             newItem.setItemMeta(bmeta);
             InventoryWorkaround.setItemInMainHand(user.getBase(), newItem);
-            user.sendMessage(tl("bookLocked"));
+            user.sendTl("bookLocked");
         } else {
-            throw new Exception(tl("holdBook"));
+            throw new Exception(user.tl("holdBook"));
         }
     }
 

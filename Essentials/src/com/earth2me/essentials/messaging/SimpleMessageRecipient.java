@@ -8,6 +8,7 @@ import com.earth2me.essentials.IUser;
 import com.earth2me.essentials.User;
 
 import java.lang.ref.WeakReference;
+import java.util.Locale;
 
 /**
  * Represents a simple reusable implementation of {@link IMessageRecipient}. This class provides functionality for the following methods:
@@ -66,10 +67,10 @@ public class SimpleMessageRecipient implements IMessageRecipient {
         MessageResponse messageResponse = recipient.onReceiveMessage(this.parent, message);
         switch (messageResponse) {
             case UNREACHABLE:
-                sendMessage(tl("recentlyForeverAlone", recipient.getDisplayName()));
+                sendMessage(tl(getLocale(), "recentlyForeverAlone", recipient.getDisplayName()));
                 break;
             case MESSAGES_IGNORED:
-                sendMessage(tl("msgIgnore", recipient.getDisplayName()));
+                sendMessage(tl(getLocale(), "msgIgnore", recipient.getDisplayName()));
                 break;
             case SENDER_IGNORED:
                 break;
@@ -77,12 +78,12 @@ public class SimpleMessageRecipient implements IMessageRecipient {
             case SUCCESS_BUT_AFK:
                 // Currently, only IUser can be afk, so we unsafely cast to get the afk message.
                 if (((IUser) recipient).getAfkMessage() != null) {
-                    sendMessage(tl("userAFKWithMessage", recipient.getDisplayName(), ((IUser) recipient).getAfkMessage()));
+                    sendMessage(tl(getLocale(), "userAFKWithMessage", recipient.getDisplayName(), ((IUser) recipient).getAfkMessage()));
                 } else {
-                    sendMessage(tl("userAFK", recipient.getDisplayName()));
+                    sendMessage(tl(getLocale(), "userAFK", recipient.getDisplayName()));
                 }
             default:
-                sendMessage(tl("msgFormat", tl("me"), recipient.getDisplayName(), message));
+                sendMessage(tl(getLocale(), "msgFormat", tl(getLocale(), "me"), recipient.getDisplayName(), message));
 
                 // Better Social Spy
                 User senderUser = getUser(this);
@@ -131,7 +132,7 @@ public class SimpleMessageRecipient implements IMessageRecipient {
             }
         }
         // Display the formatted message to this recipient.
-        sendMessage(tl("msgFormat", sender.getDisplayName(), tl("me"), message));
+        sendMessage(tl(getLocale(), "msgFormat", sender.getDisplayName(), tl(getLocale(), "me"), message));
 
         if (ess.getSettings().isLastMessageReplyRecipient()) {
             // If this recipient doesn't have a reply recipient, initiate by setting the first
@@ -150,6 +151,12 @@ public class SimpleMessageRecipient implements IMessageRecipient {
 
     @Override public boolean isReachable() {
         return this.parent.isReachable();
+    }
+
+    @Override
+    public Locale getLocale() {
+        User user = getUser(this);
+        return user != null ? user.getLocale() : ess.getI18n().getCurrentLocale();
     }
 
     /**
