@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.ess3</groupId>
+        <groupId>fr.hyparia.ess3</groupId>
         <artifactId>EssentialsXParent</artifactId>
         <version>2.15.0</version>
     </parent>
@@ -81,19 +81,19 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>NMSProvider</artifactId>
             <version>2.15.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>UpdatedMetaProvider</artifactId>
             <version>2.15.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>1_8_R1Provider</artifactId>
             <version>2.15.0</version>
             <scope>compile</scope>
@@ -105,7 +105,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>1_8_R2Provider</artifactId>
             <version>2.15.0</version>
             <scope>compile</scope>
@@ -117,13 +117,13 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>LegacyProvider</artifactId>
             <version>2.15.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>ReflectionProvider</artifactId>
             <version>2.15.0</version>
             <scope>compile</scope>

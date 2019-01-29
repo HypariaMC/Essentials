@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.ess3</groupId>
+    <groupId>fr.hyparia.ess3</groupId>
     <artifactId>EssentialsXParent</artifactId>
     <version>2.15.0</version>
 
@@ -291,6 +291,6 @@
         <!-- The plugins' build number -->
         <build.version>${git.closest.tag.commit.count}</build.version>
 
-        <full.version>${release.version}.${build.version}</full.version>
+        <full.version>${release.version}.${build.version}-hyparia</full.version>
     </properties>
 </project>
