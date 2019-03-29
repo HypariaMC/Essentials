@@ -364,7 +364,7 @@ list:
 # More output to the console.
 debug: false
 
-# Set the locale for all messages.
+# Set the default locale for all messages when a player's locale isn't found.
 # If you don't set this, the default locale of the server will be used.
 # For example, to set language to English, set locale to en, to use the file "messages_en.properties".
 # Don't forget to remove the # in front of the line.
