@@ -72,6 +72,7 @@
             <version>2.16.1</version>
             <scope>compile</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>fr.hyparia.ess3</groupId>
             <artifactId>1_8_R1Provider</artifactId>
@@ -96,6 +97,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        -->
         <dependency>
             <groupId>fr.hyparia.ess3</groupId>
             <artifactId>LegacyProvider</artifactId>
