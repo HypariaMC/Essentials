@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>EssentialsXParent</artifactId>
-        <groupId>net.ess3</groupId>
+        <groupId>fr.hyparia.ess3</groupId>
         <version>2.16.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
@@ -14,7 +14,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>fr.hyparia.ess3</groupId>
             <artifactId>NMSProvider</artifactId>
             <version>2.16.1</version>
         </dependency>

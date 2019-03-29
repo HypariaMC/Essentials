@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.ess3</groupId>
+        <groupId>fr.hyparia.ess3</groupId>
         <artifactId>EssentialsXParent</artifactId>
         <version>2.16.1</version>
     </parent>
@@ -61,19 +61,19 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>fr.hyparia.ess3</groupId>
             <artifactId>NMSProvider</artifactId>
             <version>2.16.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>fr.hyparia.ess3</groupId>
             <artifactId>UpdatedMetaProvider</artifactId>
             <version>2.16.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>fr.hyparia.ess3</groupId>
             <artifactId>1_8_R1Provider</artifactId>
             <version>2.16.1</version>
             <scope>compile</scope>
@@ -85,7 +85,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>fr.hyparia.ess3</groupId>
             <artifactId>1_8_R2Provider</artifactId>
             <version>2.16.1</version>
             <scope>compile</scope>
@@ -97,19 +97,19 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>fr.hyparia.ess3</groupId>
             <artifactId>LegacyProvider</artifactId>
             <version>2.16.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>fr.hyparia.ess3</groupId>
             <artifactId>ReflectionProvider</artifactId>
             <version>2.16.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.ess3</groupId>
+            <groupId>fr.hyparia.ess3</groupId>
             <artifactId>FlattenedProvider</artifactId>
             <version>2.16.1</version>
             <scope>compile</scope>
