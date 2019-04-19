@@ -3,13 +3,14 @@ package com.earth2me.essentials.commands;
 import com.earth2me.essentials.CommandSource;
 import com.earth2me.essentials.User;
 import com.google.common.collect.Lists;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 
 public class Commandnear extends EssentialsCommand {
@@ -82,6 +83,8 @@ public class Commandnear extends EssentialsCommand {
         final long radiusSquared = radius * radius;
         boolean showHidden = user.canInteractVanished();
 
+        Queue<User> nearbyPlayers = new PriorityQueue<>((o1, o2) -> (int) (o1.getLocation().distanceSquared(loc) - o2.getLocation().distanceSquared(loc)));
+
         for (User player : ess.getOnlineUsers()) {
             if (!player.equals(user) && (!player.isHidden(user.getBase()) || showHidden || user.getBase().canSee(player.getBase()))) {
                 final Location playerLoc = player.getLocation();
@@ -91,13 +94,19 @@ public class Commandnear extends EssentialsCommand {
 
                 final long delta = (long) playerLoc.distanceSquared(loc);
                 if (delta < radiusSquared) {
-                    if (output.length() > 0) {
-                        output.append(", ");
-                    }
-                    output.append(player.getDisplayName()).append(ChatColor.WHITE).append("(").append(ChatColor.RED).append((long) Math.sqrt(delta)).append("m").append(ChatColor.WHITE);
+                    nearbyPlayers.offer(player);
                 }
             }
         }
+
+        while (!nearbyPlayers.isEmpty()) {
+            if (output.length() > 0) {
+                output.append(", ");
+            }
+            User nearbyPlayer = nearbyPlayers.poll();
+            output.append(nearbyPlayer.getDisplayName()).append("§f(§4").append((long) nearbyPlayer.getLocation().distance(loc)).append("m§f)");
+        }
+
         return output.length() > 1 ? output.toString() : user.tl("none");
     }
 

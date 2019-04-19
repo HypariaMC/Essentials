@@ -102,7 +102,11 @@ public abstract class EssentialsCommand implements IEssentialsCommand {
         try {
             exPlayer = server.getPlayer(UUID.fromString(searchTerm));
         } catch (IllegalArgumentException ex) {
-            exPlayer = server.getPlayer(searchTerm);
+            if (getOffline) {
+                exPlayer = server.getPlayerExact(searchTerm);
+            } else {
+                exPlayer = server.getPlayer(searchTerm);
+            }
         }
 
         if (exPlayer != null) {

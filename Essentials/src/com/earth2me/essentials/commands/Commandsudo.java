@@ -54,7 +54,7 @@ public class Commandsudo extends EssentialsLoopCommand {
                 @Override
                 public void run() {
                     try {
-                        ess.getServer().dispatchCommand(user.getBase(), command);
+                        user.getBase().chat("/" + command);
                     } catch (Exception e) {
                         sender.sendTl("errorCallingCommand", command);
                     }
