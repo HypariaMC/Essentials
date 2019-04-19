@@ -86,7 +86,7 @@ public class Commandmail extends EssentialsCommand {
         }
         if (args.length >= 1 && "clear".equalsIgnoreCase(args[0])) {
             if (user.getMails() == null || user.getMails().isEmpty()) {
-                user.sendMessage(tl("noMail"));
+                user.sendMessage(user.tl("noMail"));
                 throw new NoChargeException();
             }
 
